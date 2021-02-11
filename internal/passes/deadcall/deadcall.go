@@ -65,9 +65,13 @@ func (r undefRemover) traverse(stmts *[]migo.Statement) {
 			for i, _ := range stmt.Cases {
 				if len(stmt.Cases[i]) == 1 {
 					_, tauCase = stmt.Cases[i][0].(*migo.TauStatement)
+				} else if len(stmt.Cases[i]) == 0 {
+					stmt.Cases[i] = []migo.Statement{&migo.TauStatement{}}
+					tauCase = true
 				}
 				tau = tau && tauCase
 				tauOne = tauOne || tauCase
+				tauCase = false
 			}
 			if tau { // all branches are tau
 				ss[i] = nil
