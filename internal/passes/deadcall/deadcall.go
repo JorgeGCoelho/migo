@@ -57,6 +57,25 @@ func (r undefRemover) traverse(stmts *[]migo.Statement) {
 			} else if isElseTau || isThenTau { // only one branch is tau
 				ss[i] = stmt
 			}
+		case *migo.SelectStatement:
+			for i, _ := range stmt.Cases {
+				r.traverse(&stmt.Cases[i])
+			}
+			tau, tauCase, tauOne := true,false,false
+			for i, _ := range stmt.Cases {
+				if len(stmt.Cases[i]) == 1 {
+					_, tauCase = stmt.Cases[i][0].(*migo.TauStatement)
+				}
+				tau = tau && tauCase
+				tauOne = tauOne || tauCase
+			}
+			if tau { // all branches are tau
+				ss[i] = nil
+				ss = append(ss[:i], ss[i+1:]...)
+				i--
+			} else if tauOne { // at least one branch is tau, but not all
+				ss[i] = stmt
+			}
 		case *migo.SpawnStatement:
 			if _, found := r.prog.Function(stmt.Name); !found {
 				ss[i] = nil
