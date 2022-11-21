@@ -1,8 +1,10 @@
 package migo
 
 import (
+	"os"
 	"bytes"
 	"fmt"
+	"path/filepath"
 	"go/token"
 	"strings"
 )
@@ -413,19 +415,35 @@ func (s *TauStatement) String() string {
 // SendStatement sends to Chan.
 type SendStatement struct {
 	Chan string
+	Pos  token.Position
 }
 
 func (s *SendStatement) String() string {
-	return fmt.Sprintf("send %s", s.Chan)
+	wd, err := os.Getwd();
+	if err == nil {
+		newFilename, err := filepath.Rel(wd, s.Pos.Filename);
+		if err == nil {
+			s.Pos.Filename = newFilename;
+		}
+	}
+	return fmt.Sprintf("send %s (%s)", s.Chan, s.Pos)
 }
 
 // RecvStatement receives from Chan.
 type RecvStatement struct {
 	Chan string
+	Pos  token.Position
 }
 
 func (s *RecvStatement) String() string {
-	return fmt.Sprintf("recv %s", s.Chan)
+	wd, err := os.Getwd();
+	if err == nil {
+		newFilename, err := filepath.Rel(wd, s.Pos.Filename);
+		if err == nil {
+			s.Pos.Filename = newFilename;
+		}
+	}
+	return fmt.Sprintf("recv %s (%s)", s.Chan, s.Pos)
 }
 
 // NewMem creates a new memory or variable reference.
