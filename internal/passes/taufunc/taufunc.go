@@ -25,6 +25,7 @@ package taufunc
 
 import (
 	"fmt"
+	"github.com/JorgeGCoelho/migo/v3"
 	"log"
 
 	"github.com/JorgeGCoelho/migo/v3/internal/ctrlflow"

@@ -2,6 +2,7 @@ package migoutil
 
 import (
 	"github.com/JorgeGCoelho/migo/v3"
+	"github.com/JorgeGCoelho/migo/v3/internal/passes/deadcall"
 	"github.com/JorgeGCoelho/migo/v3/internal/passes/taufunc"
 	"github.com/JorgeGCoelho/migo/v3/internal/passes/unused"
 )

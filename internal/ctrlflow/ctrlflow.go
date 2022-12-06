@@ -4,6 +4,7 @@ package ctrlflow
 
 import (
 	"fmt"
+	"github.com/JorgeGCoelho/migo/v3"
 	"log"
 	"strings"
 )

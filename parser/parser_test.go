@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"github.com/JorgeGCoelho/migo/v3"
 	"strings"
 	"testing"
 )
@@ -43,7 +44,7 @@ func TestParseMem(t *testing.T) {
 		t.Errorf("expecting letmem statement but got %v", fn.Stmts[0])
 		t.FailNow()
 	}
-	if stmt0.Name != "x" {
+	if stmt0.Name.Name() != "x" {
 		t.Errorf("expected letmem x but got letmem %s", stmt0.Name)
 	}
 	stmt1, ok := fn.Stmts[1].(*migo.MemRead)
@@ -83,7 +84,7 @@ func TestParseMutex(t *testing.T) {
 		t.Errorf("expecting letsync statement but got %v", fn.Stmts[0])
 		t.FailNow()
 	}
-	if stmt0.Name != "a" {
+	if stmt0.Name.Name() != "a" {
 		t.Errorf("expected letsync a mutex but got %v", fn.Stmts[0])
 	}
 	stmt1, ok := fn.Stmts[1].(*migo.SyncMutexLock)
@@ -123,7 +124,7 @@ func TestParseRWMutex(t *testing.T) {
 		t.Errorf("expecting letsync statement but got %v", fn.Stmts[0])
 		t.FailNow()
 	}
-	if stmt0.Name != "a" {
+	if stmt0.Name.Name() != "a" {
 		t.Errorf("expected letsync a rwmutex but got %v", fn.Stmts[0])
 	}
 	stmt1, ok := fn.Stmts[1].(*migo.SyncMutexLock)

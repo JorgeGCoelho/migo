@@ -1,6 +1,7 @@
 package deadcall
 
 import (
+	"github.com/JorgeGCoelho/migo/v3"
 	"strings"
 	"testing"
 

@@ -6,6 +6,7 @@
 package unused
 
 import (
+	"github.com/JorgeGCoelho/migo/v3"
 	"github.com/JorgeGCoelho/migo/v3/internal/ctrlflow"
 )
 

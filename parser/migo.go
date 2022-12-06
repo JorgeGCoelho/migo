@@ -26,7 +26,7 @@ func newchanStmt(name, ch string, size int) migo.Statement {
 }
 
 func newMutex(name string) *migo.NewSyncMutex {
-	return &migo.NewSyncMutex{Name: name}
+	return &migo.NewSyncMutex{Name: &plainNamedVar{name}}
 }
 
 func lockStmt(name string) *migo.SyncMutexLock {
@@ -38,7 +38,7 @@ func unlockStmt(name string) *migo.SyncMutexUnlock {
 }
 
 func newRWMutex(name string) *migo.NewSyncRWMutex {
-	return &migo.NewSyncRWMutex{Name: name}
+	return &migo.NewSyncRWMutex{Name: &plainNamedVar{name}}
 }
 
 func rlockStmt(name string) *migo.SyncRWMutexRLock {
@@ -58,7 +58,7 @@ func writeStmt(name string) *migo.MemWrite {
 }
 
 func newmemStmt(name string) *migo.NewMem {
-	return &migo.NewMem{Name: name}
+	return &migo.NewMem{Name: &plainNamedVar{name}}
 }
 
 func closeStmt(ch string) *migo.CloseStatement {

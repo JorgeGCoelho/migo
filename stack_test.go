@@ -1,6 +1,7 @@
 package migo_test
 
 import (
+	"github.com/JorgeGCoelho/migo/v3"
 	"testing"
 )
 

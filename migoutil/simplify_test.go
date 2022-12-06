@@ -2,6 +2,7 @@ package migoutil_test
 
 import (
 	"fmt"
+	"github.com/JorgeGCoelho/migo/v3"
 	"strings"
 	"testing"
 
@@ -379,7 +380,7 @@ func TestSimplfyProgramMemOp(t *testing.T) {
 	mainFunc := migo.NewFunction("main.main")
 	mainFunc.AddStmts(
 		&migo.NewChanStatement{Name: named{"ch"}, Chan: "ch_instance", Size: 0},
-		&migo.NewMem{Name: "mem0"},
+		&migo.NewMem{Name: named{"mem0"}},
 		&migo.SpawnStatement{Name: "send", Params: []*migo.Parameter{
 			&migo.Parameter{Caller: named{"ch"}}},
 		},
