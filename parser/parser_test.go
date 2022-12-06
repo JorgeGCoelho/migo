@@ -3,8 +3,6 @@ package parser
 import (
 	"strings"
 	"testing"
-
-	"github.com/jujuyuki/migo/v3"
 )
 
 func TestParser(t *testing.T) {

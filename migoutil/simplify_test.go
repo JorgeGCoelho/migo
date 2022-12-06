@@ -5,9 +5,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jujuyuki/migo/v3"
-	"github.com/jujuyuki/migo/v3/migoutil"
-	"github.com/jujuyuki/migo/v3/parser"
+	"github.com/JorgeGCoelho/migo/v3/migoutil"
+	"github.com/JorgeGCoelho/migo/v3/parser"
 )
 
 // ErrFuncNotExists is Error if function does not exist in program which is
@@ -44,21 +43,26 @@ func (n named) String() string {
 // Tests SimplifyProgram with simple send/recv/work functions.
 //
 // def main():
-//   let ch = newchan ch_instance, 0
-//   spawn send(ch)
-//   spawn recv(ch)
-//   spawn work()
-//   recv ch
-//   recv ch
+//
+//	let ch = newchan ch_instance, 0
+//	spawn send(ch)
+//	spawn recv(ch)
+//	spawn work()
+//	recv ch
+//	recv ch
+//
 // def send(sch):
-//   send sch
+//
+//	send sch
+//
 // def recv(rch):
-//   recv rch
-//   send rch
+//
+//	recv rch
+//	send rch
+//
 // def work:
 //
 // main, send, recv should remain after SimplifyProgram
-//
 func TestSimplifyProgram(t *testing.T) {
 	p := migo.NewProgram()
 	mainFunc := migo.NewFunction("main.main")
@@ -168,24 +172,32 @@ def work(): tau;
 // Tests SimplifyProgram with calls to empty functions.
 //
 // def main():
-//   let ch = newchan ch_instance, 1
-//   call work(ch)
+//
+//	let ch = newchan ch_instance, 1
+//	call work(ch)
+//
 // def work(ch):
-//   call workwork()
-//   spawn work$1(ch)
-//   call work$2(ch)
+//
+//	call workwork()
+//	spawn work$1(ch)
+//	call work$2(ch)
+//
 // def workwork():
-//   call workworkwork()
+//
+//	call workworkwork()
+//
 // def workworkwork():
 // def work$1(ch):
 // def work$2(ch):
-//   call work$3(ch)
+//
+//	call work$3(ch)
+//
 // def work$3(ch):
-//   recv ch
-//   send ch
+//
+//	recv ch
+//	send ch
 //
 // main, work, work$2, work$3 should remain after SimplifyProgram
-//
 func TestSimplifyProgram2(t *testing.T) {
 	p := migo.NewProgram()
 	mainFunc := migo.NewFunction("main.main")

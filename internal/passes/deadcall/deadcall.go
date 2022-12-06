@@ -3,10 +3,6 @@
 // Dead functions calls are calls (or spawns) to functions that are not defined.
 package deadcall
 
-import (
-	"github.com/jujuyuki/migo/v3"
-)
-
 // Remove removes undefined function calls and spawns.
 func Remove(prog *migo.Program) {
 	rmvr := undefRemover{prog: prog}
@@ -61,7 +57,7 @@ func (r undefRemover) traverse(stmts *[]migo.Statement) {
 			for i, _ := range stmt.Cases {
 				r.traverse(&stmt.Cases[i])
 			}
-			tau, tauCase, tauOne := true,false,false
+			tau, tauCase, tauOne := true, false, false
 			for i, _ := range stmt.Cases {
 				if len(stmt.Cases[i]) == 1 {
 					_, tauCase = stmt.Cases[i][0].(*migo.TauStatement)

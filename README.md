@@ -1,9 +1,9 @@
 # migo
 
-## `jujuyuki/migo` is a MiGo Types library in Go.
+## `JorgeGCoelho/migo` is a MiGo Types library in Go.
 
-This library is a fork of the [original MiGo Types library](https://github.com/nickng/migo) 
-with minor adjustments.
+This library is a fork of a [fork](https://github.com/jujuyuki/migo) of the [original MiGo Types library](https://github.com/nickng/migo) 
+with minor adjustments, for my project [GoDDaR](https://github.com/JorgeGCoelho/GoDDaR)
 MiGo (mini-go) is a calculus introduced in [this
 paper](http://mrg.doc.ic.ac.uk/publications/fencing-off-go-liveness-and-safety-for-channel-based-programming/)
 to capture core concurrency features of Go. 

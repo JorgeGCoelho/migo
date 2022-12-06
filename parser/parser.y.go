@@ -10,7 +10,7 @@ import __yyfmt__ "fmt"
 import (
 	"io"
 
-	"github.com/nickng/migo/v3"
+	"github.com/JorgeGCoelho/migo/v3"
 )
 
 var prog *migo.Program

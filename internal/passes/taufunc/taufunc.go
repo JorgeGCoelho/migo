@@ -3,22 +3,21 @@
 // τ functions are functions where the bodies are empty or just τ-actions.
 // The transformation algorithm is as follows:
 //
-//     Build control flow graph of given program
-//     Foreach function:
-//     	Mark τ if function body does not contain non control flow primitives
-//     Repeat until no changes:
-//     	Foreach non-τ function:
-//     		If CFG parent is τ: Mark parent non-τ
-//     Remove all function definitions marked as τ
+//	Build control flow graph of given program
+//	Foreach function:
+//		Mark τ if function body does not contain non control flow primitives
+//	Repeat until no changes:
+//		Foreach non-τ function:
+//			If CFG parent is τ: Mark parent non-τ
+//	Remove all function definitions marked as τ
 //
 // Whether a primitive is considered a τ or not is defined by the isTau method.
 //
-// Usage
+// # Usage
 //
 // To remove all tau functions:
 //
-//     taufunc.Find(prog, taufunc.Remove)
-//
+//	taufunc.Find(prog, taufunc.Remove)
 package taufunc
 
 // This file contains the implementation of transformation which
@@ -28,8 +27,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/jujuyuki/migo/v3"
-	"github.com/jujuyuki/migo/v3/internal/ctrlflow"
+	"github.com/JorgeGCoelho/migo/v3/internal/ctrlflow"
 )
 
 // Find finds function definitions from Program prog

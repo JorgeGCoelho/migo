@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jujuyuki/migo/v3/internal/ctrlflow"
-	"github.com/jujuyuki/migo/v3/parser"
+	"github.com/JorgeGCoelho/migo/v3/internal/ctrlflow"
+	"github.com/JorgeGCoelho/migo/v3/parser"
 )
 
 func TestEmpty(t *testing.T) {

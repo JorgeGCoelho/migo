@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"log"
 	"strings"
-
-	"github.com/jujuyuki/migo/v3"
 )
 
 // Graph is a control flow graph.

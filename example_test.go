@@ -2,8 +2,6 @@ package migo_test
 
 import (
 	"fmt"
-
-	"github.com/jujuyuki/migo/v3"
 )
 
 func ExampleStmtsStack() {
