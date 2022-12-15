@@ -1,11 +1,11 @@
 package migo
 
 import (
-	"os"
 	"bytes"
 	"fmt"
-	"path/filepath"
 	"go/token"
+	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -418,32 +418,42 @@ type SendStatement struct {
 	Pos  token.Position
 }
 
-func (s *SendStatement) String() string {
-	wd, err := os.Getwd();
+func shortenPos(pos token.Position) token.Position {
+	wd, err := os.Getwd()
 	if err == nil {
-		newFilename, err := filepath.Rel(wd, s.Pos.Filename);
+		newFilename, err := filepath.Rel(wd, pos.Filename)
 		if err == nil {
-			s.Pos.Filename = newFilename;
+			pos.Filename = newFilename
 		}
 	}
-	return fmt.Sprintf("send %s (%s)", s.Chan, s.Pos)
+	return pos
+}
+
+func (s *SendStatement) String() string {
+	pos := shortenPos(s.Pos)
+	return fmt.Sprintf("send %s (%s)", s.Chan, pos)
 }
 
 // RecvStatement receives from Chan.
 type RecvStatement struct {
-	Chan string
-	Pos  token.Position
+	Chan  string
+	Pos   token.Position
+	Sends []token.Position
 }
 
 func (s *RecvStatement) String() string {
-	wd, err := os.Getwd();
-	if err == nil {
-		newFilename, err := filepath.Rel(wd, s.Pos.Filename);
-		if err == nil {
-			s.Pos.Filename = newFilename;
-		}
+	pos := shortenPos(s.Pos)
+	var buffer bytes.Buffer
+
+	if len(s.Sends) != 0 {
+		buffer.WriteString(" ->")
 	}
-	return fmt.Sprintf("recv %s (%s)", s.Chan, s.Pos)
+
+	for _, send := range s.Sends {
+		fmt.Fprintf(&buffer, " (%s)", shortenPos(send))
+	}
+
+	return fmt.Sprintf("recv %s (%s)%s", s.Chan, pos, buffer.String())
 }
 
 // NewMem creates a new memory or variable reference.
